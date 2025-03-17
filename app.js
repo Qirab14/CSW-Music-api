@@ -12,8 +12,10 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ MongoDB Connected Successfully!"))
+  .catch(err => console.error("❌ MongoDB Connection Failed:", err));
+  
 // Authentication route (for generating tokens)
 app.post('/login', (req, res) => {
     // In a real application, you would validate the user credentials here
